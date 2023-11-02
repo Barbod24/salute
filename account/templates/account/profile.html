@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="text-center">{{user.username}}</h2>
+    <h2 class="text-center">Email: {{user.email}}</h2>
+    <h2 class="text-center">Date Join: {{user.date_joined|date:"Y-m-d"}}</h2>
+    <h2 class="text-center">Last Login: {{user.last_login|date:"Y-m-d h:m"}}</h2>
+
+    {% if request.user.id == user.id %}
+        <a href="{% url "home:post_create" %}" class="btn btn-primary mb-2">Create</a>
+    {% endif %}
+    <div class="card">
+        {% for post in posts %}
+            <a href="{{ post.get_absolute_url }}" class="card-body">{{ post.body|truncatewords:8 }}</a>
+        {% endfor %}
+    </div>
+
+    
+    
+   {% endblock content %}
